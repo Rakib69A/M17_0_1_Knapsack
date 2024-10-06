@@ -1,24 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool subsetSum(int n,int a[], int sum)
+bool subsetSum(int n, int a[], int s)
 {
-    if (n == 0)
-    {
-        if (sum == 0)
+    if(n==0){
+        if(s==0)
             return true;
         else
             return false;
     }
-    if (a[n - 1] <= sum)
-    { 
-        bool op1 = subsetSum(n - 1, a, sum - a[n - 1]);
-        bool op2 = subsetSum(n - 1, a, sum);
-        return op1 || op2;
-    }
-    else
+    if (a[n - 1] <= s)
     {
-        bool op2 = subsetSum(n - 1, a, sum);
-        return op2;
+        bool op1 = subsetSum(n - 1, a, s - a[n - 1]);
+        bool op2 = subsetSum(n - 1, a, s);
+        return op1 || op2;
+    }else{
+        return subsetSum(n-1,a,s);
     }
 }
 int main()
@@ -27,12 +23,10 @@ int main()
     cin >> n;
     int a[n];
     for (int i = 0; i < n; i++)
-    {
         cin >> a[i];
-    }
-    int sum;
-    cin >> sum;
-    if (subsetSum(n, a, sum)==true)
+    int s;
+    cin >> s;
+    if (subsetSum(n, a, s))
         cout << "YES" << endl;
     else
         cout << "NO" << endl;
